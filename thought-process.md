@@ -2,9 +2,11 @@
 
 - For extension #2, I would have used Redis as a common data store for the IdMap. This would ensure that multiple
   instances of the app behind a load balancer would be able to access the same IdMap. Redis can be seen as single
-  threaded which will ensure the mutex aspect. Additionally, Redis' master-slave model and sentinel can be used to
-  achieve eventual consistency and full availability. [Architecture](architecture.png) showcases the client-server
-  models with Redis that can be used for the workflow.
+  threaded which will ensure the mutex aspect.
+- Additionally, Redis' master-slave model and sentinel can be used to achieve eventual consistency and full availability and
+  showcases the client-server models with Redis that can be used for the workflow.
+
+  ![Architecture](architecture.png) 
 
 - When deploying, container orchestration can be done using Kubernetes for scaling the service behind a load balancer.
   The load balancer can be set up using any cloud provider like GCP/AWS.
@@ -15,4 +17,7 @@
 - For extensions, classes can be implemented for alternative workflow. Or features can be used which can be mapped to
   pick the workflow.
 
-- Docker image is pushed to 
+- Docker image :
+ ```
+docker pull ghcr.io/imrahul361/verve:latest
+```
