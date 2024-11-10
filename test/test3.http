@@ -1,0 +1,5 @@
+## Extension 1 : ## Print using Post Method
+GET http://localhost:8080/api/verve/accept?id=1&method=POST&endpoint=http://localhost:8000/print
+
+###
+

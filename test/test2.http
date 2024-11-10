@@ -1,0 +1,4 @@
+## Print using Get Method
+GET http://localhost:8080/api/verve/accept?id=2&endpoint=http://localhost:8000/print
+
+###

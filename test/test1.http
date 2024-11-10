@@ -1,0 +1,4 @@
+# Log request id, no response
+GET http://localhost:8080/api/verve/accept?id=1
+
+###

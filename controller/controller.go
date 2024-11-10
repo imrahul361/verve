@@ -78,7 +78,7 @@ func SendGETRequest(endpoint string) []byte {
 }
 
 func SendPOSTRequest(url string) []byte {
-	count := fmt.Sprintf("{'count' : %v}", getCount())
+	count := fmt.Sprintf("%d", getCount())
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer([]byte(count)))
 	payLoad := Payload{}
 

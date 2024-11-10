@@ -2,6 +2,7 @@ package router
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"verve/controller"
@@ -44,7 +45,15 @@ func Accept(writer http.ResponseWriter, request *http.Request) {
 }
 
 func Print(writer http.ResponseWriter, request *http.Request) {
-	count := request.URL.Query().Get("count")
+	count := ""
+	switch request.Method {
+	case http.MethodGet:
+		count = request.URL.Query().Get("count")
+	case http.MethodPost:
+		if buf, err := io.ReadAll(request.Body); err == nil {
+			count = string(buf)
+		}
+	}
 	if count == "" {
 		writer.WriteHeader(http.StatusBadRequest)
 		_, err := writer.Write([]byte("The 'count' parameter must be a positive integer."))
@@ -53,6 +62,7 @@ func Print(writer http.ResponseWriter, request *http.Request) {
 		}
 		return
 	}
+
 	writer.WriteHeader(http.StatusOK)
 	_, err := writer.Write([]byte(fmt.Sprint("Unique requests ID count:", count)))
 	if err != nil {
